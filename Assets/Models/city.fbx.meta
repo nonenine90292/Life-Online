@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: 1fb4c674822b90646b98f0d6b06fc263
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Merged_materials
+    second: {fileID: 2100000, guid: 5b32916a0ea8b0847bb9942aa057d4da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1
+    second: {fileID: 2100000, guid: a6fabc484bfe79947bf60d1ee0cdb49e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_0
+    second: {fileID: 2100000, guid: f2e37bc25dbd05146a9ef19e2c8bf27a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_1
+    second: {fileID: 2100000, guid: 5e777f4da08bfb1479b3d9d1a0652569, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_10
+    second: {fileID: 2100000, guid: 27cb8960a31df2c4a86a61640a9c07a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_11
+    second: {fileID: 2100000, guid: e839ddda22b0380468f8e88279e85ea5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_12
+    second: {fileID: 2100000, guid: 96e684fd0c06b224a942855c0b606f4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_13
+    second: {fileID: 2100000, guid: e8aa8a6a271b77f42b3889047bd1207d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_14
+    second: {fileID: 2100000, guid: d29de077c218c5e46b752a40969eba06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_15
+    second: {fileID: 2100000, guid: aea1f75874529db4397ccce1e1fb9a74, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_16
+    second: {fileID: 2100000, guid: 59aeae6c7c768c641951f8ce2fd38dfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_17
+    second: {fileID: 2100000, guid: e57f59e6270a53a41808e537dbec6943, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_18
+    second: {fileID: 2100000, guid: 86c40ddc18411ef4da9edf88ee98690d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_19
+    second: {fileID: 2100000, guid: eb837504fac49b64b9589b5cfb34ddc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_2
+    second: {fileID: 2100000, guid: 87890bff478e26f459f8576676da89e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_20
+    second: {fileID: 2100000, guid: 0ce59b7cd591ec845bf469960df508c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_21
+    second: {fileID: 2100000, guid: 48033a703dc90114b90a95a0bfd0c3c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_22
+    second: {fileID: 2100000, guid: 5cf252ed0110dbc4fa6334f3aaf79aac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_23
+    second: {fileID: 2100000, guid: 6649daaf23541a6498f90d63e90a2e92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_24
+    second: {fileID: 2100000, guid: 694cbb3b1584ccb4fafde93cee2ec75f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_25
+    second: {fileID: 2100000, guid: b19c4071445204749a779f5770ab48b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_26
+    second: {fileID: 2100000, guid: efea10b97a93bf24aa2d358044411cd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_27
+    second: {fileID: 2100000, guid: ac2519bb291fb6f4fa54304dccc2fdd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_28
+    second: {fileID: 2100000, guid: 2154ae955209fa541a9cf00d9c8b9f9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_29
+    second: {fileID: 2100000, guid: 7fbb0e2f99509fe4491775d33e001ced, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_3
+    second: {fileID: 2100000, guid: 4a16b5b9f7efb144fb89ba6d1429cfaa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_30
+    second: {fileID: 2100000, guid: dd952a3c99d590444a31d073b2eb0710, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_31
+    second: {fileID: 2100000, guid: 76402ff24a1735b4caf5275f17f93eb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_32
+    second: {fileID: 2100000, guid: 68284d5c1ecae4a4bbba333c4982470b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_33
+    second: {fileID: 2100000, guid: 5e458fd8eb3b59140ba7e29fc9864e89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_34
+    second: {fileID: 2100000, guid: db15802564bf9f74680043ea0c53be16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_35
+    second: {fileID: 2100000, guid: 52fcb82f77f938242a50cf2f097ff813, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_36
+    second: {fileID: 2100000, guid: 3975af6d67066b440b904ce1bf5dcd63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_37
+    second: {fileID: 2100000, guid: 4f95cb9f60bfd934990a3bd8d97432f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_38
+    second: {fileID: 2100000, guid: a2f62850bf1f10a418ea4f8f41c5e964, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_39
+    second: {fileID: 2100000, guid: cb134f76a4ef763419e5985616eb5f71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_4
+    second: {fileID: 2100000, guid: 4cb509f635f5b8e48af9207d1e6f1d05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_40
+    second: {fileID: 2100000, guid: ad705176532c3514c838ba5b4d7e5cca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_41
+    second: {fileID: 2100000, guid: 36a595b6091e3de499bbac75bcaa7ff1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_42
+    second: {fileID: 2100000, guid: cc7224cd06d1c9344ba7cdce293cae5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_43
+    second: {fileID: 2100000, guid: 87cdef793688b1947bde1d41ffdfeb71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_44
+    second: {fileID: 2100000, guid: cb6b30e8a38226745a333fdb1c227cef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_45
+    second: {fileID: 2100000, guid: f88bec4e7ebd7f64eae9205dff31cb52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_46
+    second: {fileID: 2100000, guid: 42e775b409e846542825ca14aa195a0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_47
+    second: {fileID: 2100000, guid: eb876a1b8522a5d43a07436965a77797, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_48
+    second: {fileID: 2100000, guid: eac95e9c459d92b498d8ae84bef6e08b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_49
+    second: {fileID: 2100000, guid: 69f1681de84d4f84b93185bbebd3cf95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_5
+    second: {fileID: 2100000, guid: f20f87cf96a1a1c4186d1be6ae38ac9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_50
+    second: {fileID: 2100000, guid: 208f4b35ea4e1d5439d9ff24bbc65649, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_51
+    second: {fileID: 2100000, guid: 0fcaf879d9fdf0b43abbf1050008b117, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_52
+    second: {fileID: 2100000, guid: 4516e4f699fb8bc4fa123bfcffa3c861, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_53
+    second: {fileID: 2100000, guid: 343b18f43a71fc44e8e807766e395da4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_54
+    second: {fileID: 2100000, guid: a33f16590054d67409a5905b411cd1cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_55
+    second: {fileID: 2100000, guid: 5b7de58e91eadcf41856f10431476804, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_56
+    second: {fileID: 2100000, guid: c9826219e9c931040bb5b7f9aaa12cbd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_57
+    second: {fileID: 2100000, guid: 971802d3063239845ab82a3c36d3cb00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_58
+    second: {fileID: 2100000, guid: 87f24498d0a2a514f82b9d6ec983c229, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_59
+    second: {fileID: 2100000, guid: 935e488386884d847a60c84de5bc93a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_6
+    second: {fileID: 2100000, guid: 74717571b16ab914f818b74473aec849, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_60
+    second: {fileID: 2100000, guid: 7e0b7047e8d20d44da7cf6b1bf1d5116, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_61
+    second: {fileID: 2100000, guid: 4a2a1933a28980e48b1683e2548bc18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_62
+    second: {fileID: 2100000, guid: 7b77b5a8c9d2f584da550515ebfc6175, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_63
+    second: {fileID: 2100000, guid: d2a8b5bc4d95e9c4595d56561265483b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_64
+    second: {fileID: 2100000, guid: f0c18e48297b82044ab29a3abbcd71a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_65
+    second: {fileID: 2100000, guid: d40c9d586837cf54987d957de334f515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_66
+    second: {fileID: 2100000, guid: bba9fb122f0696b479268a69be956fab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_67
+    second: {fileID: 2100000, guid: a1a42befbe7e9e84ebba48893a7fd331, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_68
+    second: {fileID: 2100000, guid: dc647919fa089a142ac70f9d4965a9cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_69
+    second: {fileID: 2100000, guid: 52e614f6676c62f43a3b52d6710af9e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_7
+    second: {fileID: 2100000, guid: 0febb6db5eb159343996f570fb0ad9da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_70
+    second: {fileID: 2100000, guid: 755e9e52e2eedf74e9b47534ec6aa4f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_71
+    second: {fileID: 2100000, guid: f3067a25df3fce444ba364a88c4d8267, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_72
+    second: {fileID: 2100000, guid: 3bf97e2694a864b429db288eb1c6a43f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_73
+    second: {fileID: 2100000, guid: ff9e91a2525e2764eb0f728735448060, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_74
+    second: {fileID: 2100000, guid: 4f618a67bb5e2cd41bba5b0e756c945a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_75
+    second: {fileID: 2100000, guid: a974dd943084c56458d1ca949971b795, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_76
+    second: {fileID: 2100000, guid: 7c39e27748d8de4499db55f29b79b132, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_77
+    second: {fileID: 2100000, guid: f074ef75c9b3fdc49b4c2c42e19c40f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_78
+    second: {fileID: 2100000, guid: 84d1530a18d4ac84f8888db04f301e50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_79
+    second: {fileID: 2100000, guid: 137446b9b9a2a3846921190fb4e7f27c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_8
+    second: {fileID: 2100000, guid: e49c4b973dbcc9b428db2bba542a52bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_80
+    second: {fileID: 2100000, guid: bd9bdafb505998b4999dadb9aa3e78d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_81
+    second: {fileID: 2100000, guid: 5e090cffbd1722e49a9f82cc6a705d30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_82
+    second: {fileID: 2100000, guid: f94ce3e3e6daaca428916a0e85150b3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_83
+    second: {fileID: 2100000, guid: 33655fc42bc6b054cb8460393f9d4b90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_84
+    second: {fileID: 2100000, guid: 54051ae1592dcce48a930dfda0931993, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_85
+    second: {fileID: 2100000, guid: 17f2a05f49f0d534baceadeb6140f1dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_86
+    second: {fileID: 2100000, guid: c2e7ddeefcdd3374ba01f984af027a4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_87
+    second: {fileID: 2100000, guid: 4518d5047f0244b4381c5d069b3bbacd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_88
+    second: {fileID: 2100000, guid: a99d0eb201a469340aa1f98951de8c32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_89
+    second: {fileID: 2100000, guid: 1cb2744eed70dcf4c934f12a4b0c2f62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_9
+    second: {fileID: 2100000, guid: e9a66913a6b7e67408c00d83718d3f7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_90
+    second: {fileID: 2100000, guid: 318173725ed3cb64fa29fce61048fc44, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_91
+    second: {fileID: 2100000, guid: 4d88bf02d18059a448f78cf03e4bd155, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_92
+    second: {fileID: 2100000, guid: 711e526609284b645baa681209f65805, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_93
+    second: {fileID: 2100000, guid: 97c4ea8976fc81e40a0c7b31c95bad9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_94
+    second: {fileID: 2100000, guid: ae617ebebe95c73458fdc1b2a7ca39fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_95
+    second: {fileID: 2100000, guid: 467161838a241eb42b3348cb12ff17c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props1_u2NWBuild9_1_96
+    second: {fileID: 2100000, guid: aa1506d557fd6434d8b4ec48cd9cf1a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StreeLamp1
+    second: {fileID: 2100000, guid: 4c505c490e54a434f8f146bd25daf0d2, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 2.5
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 2.5
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
