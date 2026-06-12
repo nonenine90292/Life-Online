@@ -262,11 +262,6 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: unnamed
-      parentName: Personaje 2(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 100, y: 100, z: 100}
     - name: Root.001
       parentName: Personaje 2(Clone)
       position: {x: 0.000010206287, y: 0.070820466, z: -0.0012919292}
@@ -282,6 +277,46 @@ ModelImporter:
       position: {x: 2.9132252e-13, y: -7.4505804e-11, z: -5.9604643e-10}
       rotation: {x: -0.50847447, y: 0.491378, z: 0.4950918, w: 0.5048619}
       scale: {x: 0.9999997, y: 0.99999976, z: 0.9999999}
+    - name: ' L Thigh'
+      parentName: ' Pelvis'
+      position: {x: 3.0950867e-10, y: 3.0391986e-10, z: 0.0011230462}
+      rotation: {x: -0.0386628, y: 0.9992523, z: 0.00025933146, w: 0.000014085664}
+      scale: {x: 0.9999999, y: 1.0000004, z: 1}
+    - name: ' L Calf'
+      parentName: ' L Thigh'
+      position: {x: -0.004550789, y: 0.0000000020675361, z: -0.00000002557679}
+      rotation: {x: -0.0000017396486, y: -0.0000018672919, z: 0.07894457, w: 0.99687904}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: ' L Foot'
+      parentName: ' L Calf'
+      position: {x: -0.0048340065, y: -0.0000000016979175, z: -0.000000013672439}
+      rotation: {x: 0.00015244348, y: 0.003673523, z: -0.010775051, w: 0.9999352}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: ' L Toe0'
+      parentName: ' L Foot'
+      position: {x: -0.0010156222, y: 0.0015332043, z: -0.0000000013233511}
+      rotation: {x: 0.00000055548924, y: -0.0000014914984, z: -0.761541, w: 0.6481167}
+      scale: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
+    - name: ' R Thigh'
+      parentName: ' Pelvis'
+      position: {x: -3.0552222e-10, y: -4.5228432e-10, z: -0.0011230463}
+      rotation: {x: -0.038653348, y: 0.9992526, z: -0.00030631563, w: -0.000009205728}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: ' R Calf'
+      parentName: ' R Thigh'
+      position: {x: -0.004550794, y: 1.0011717e-10, z: -0.0000000016627564}
+      rotation: {x: 0.00000021812933, y: 0.0000002874151, z: 0.07892703, w: 0.9968804}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ' R Foot'
+      parentName: ' R Calf'
+      position: {x: -0.004834003, y: 6.961636e-10, z: 4.4688875e-10}
+      rotation: {x: -0.00069531676, y: -0.010764485, z: -0.05568756, w: 0.99839}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.9999998}
+    - name: ' R Toe0'
+      parentName: ' R Foot'
+      position: {x: -0.0010156258, y: 0.0015332049, z: -0.000000008466086}
+      rotation: {x: 0.0000007992938, y: -0.000002554233, z: -0.70710707, w: 0.70710653}
+      scale: {x: 1, y: 1, z: 1}
     - name: ' Spine'
       parentName: ' Pelvis'
       position: {x: 0.000009765492, y: -4.248305e-11, z: -0.00000976563}
@@ -345,7 +380,7 @@ ModelImporter:
     - name: L Finger01
       parentName: ' L Finger'
       position: {x: -0.0004198899, y: 0.000068493326, z: -0.00001969844}
-      rotation: {x: -0.04784394, y: -0.028987568, z: 0.006950349, w: 0.9984099}
+      rotation: {x: -0.047843944, y: -0.028987568, z: 0.0069503495, w: 0.9984099}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip01 R Clavicle
       parentName: ' Neck'
@@ -392,46 +427,11 @@ ModelImporter:
       position: {x: -0.0017382802, y: -0.0006933595, z: 5.605608e-10}
       rotation: {x: 0.00000015384606, y: -0.00000044502312, z: -0.69541264, w: 0.71861064}
       scale: {x: 1, y: 0.99999994, z: 1}
-    - name: ' L Thigh'
-      parentName: ' Pelvis'
-      position: {x: 3.0950867e-10, y: 3.0391986e-10, z: 0.0011230462}
-      rotation: {x: -0.0386628, y: 0.9992523, z: 0.00025933146, w: 0.000014085664}
-      scale: {x: 0.9999999, y: 1.0000004, z: 1}
-    - name: ' L Calf'
-      parentName: ' L Thigh'
-      position: {x: -0.004550789, y: 0.0000000020675361, z: -0.00000002557679}
-      rotation: {x: -0.0000017396486, y: -0.0000018672919, z: 0.07894457, w: 0.99687904}
-      scale: {x: 0.99999994, y: 0.99999994, z: 1}
-    - name: ' L Foot'
-      parentName: ' L Calf'
-      position: {x: -0.0048340065, y: -0.0000000016979175, z: -0.000000013672439}
-      rotation: {x: 0.00015244348, y: 0.003673523, z: -0.010775051, w: 0.9999352}
-      scale: {x: 1, y: 0.99999994, z: 1}
-    - name: ' L Toe0'
-      parentName: ' L Foot'
-      position: {x: -0.0010156222, y: 0.0015332043, z: -0.0000000013233511}
-      rotation: {x: 0.00000055548924, y: -0.0000014914984, z: -0.761541, w: 0.6481167}
-      scale: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
-    - name: ' R Thigh'
-      parentName: ' Pelvis'
-      position: {x: -3.0552222e-10, y: -4.5228432e-10, z: -0.0011230463}
-      rotation: {x: -0.038653348, y: 0.9992526, z: -0.00030631563, w: -0.000009205728}
-      scale: {x: 1, y: 1, z: 0.99999994}
-    - name: ' R Calf'
-      parentName: ' R Thigh'
-      position: {x: -0.004550794, y: 1.0011717e-10, z: -0.0000000016627564}
-      rotation: {x: 0.00000021812933, y: 0.0000002874151, z: 0.07892703, w: 0.9968804}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ' R Foot'
-      parentName: ' R Calf'
-      position: {x: -0.004834003, y: 6.961636e-10, z: 4.4688875e-10}
-      rotation: {x: -0.00069531676, y: -0.010764485, z: -0.05568756, w: 0.99839}
-      scale: {x: 0.9999999, y: 0.9999999, z: 0.9999998}
-    - name: ' R Toe0'
-      parentName: ' R Foot'
-      position: {x: -0.0010156258, y: 0.0015332049, z: -0.000000008466086}
-      rotation: {x: 0.0000007992938, y: -0.000002554233, z: -0.70710707, w: 0.70710653}
-      scale: {x: 1, y: 1, z: 1}
+    - name: unnamed
+      parentName: Personaje 2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
