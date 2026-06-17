@@ -1,13 +1,12 @@
 using UnityEngine;
-using System.Collections;
 
 public class CarController : MonoBehaviour
 {
     [Header("Car Settings")]
-    public float acceleration = 1000f;
-    public float maxSpeed = 50f;
-    public float steeringAngle = 30f;
-    public float brakeForce = 3000f;
+    public float acceleration = 1000f;   // Acceleration force
+    public float maxSpeed = 50f;         // Maximum speed
+    public float steeringAngle = 30f;    // Maximum steering angle
+    public float brakeForce = 3000f;     // Brake force
 
     [Header("Wheel Colliders")]
     public WheelCollider frontLeftWheel;
@@ -22,43 +21,20 @@ public class CarController : MonoBehaviour
     public Transform rearRightTransform;
 
     [Header("Wheel Flip Settings")]
-    public bool flipFrontLeft;
-    public bool flipFrontRight;
-    public bool flipRearLeft;
-    public bool flipRearRight;
+    public bool flipFrontLeft;  // Should the front left wheel be flipped?
+    public bool flipFrontRight; // Should the front right wheel be flipped?
+    public bool flipRearLeft;   // Should the rear left wheel be flipped?
+    public bool flipRearRight;  // Should the rear right wheel be flipped?
 
     [Header("Live Data")]
-    public float speed;
-
-    [Header("Engine System")]
-    public bool engineOn;
-    public KeyCode engineKey = KeyCode.E;
-    public float engineStartDelay = 1f;
-
-    [Header("Driving Feel")]
-    public float throttleSmoothness = 4f;
-    public float steeringSmoothness = 5f;
-    public float tractionControl = 0.98f;
-    public float downforce = 50f;
-
-    [Header("Fake Engine")]
-    public float engineRPM;
-    public float minRPM = 800f;
-    public float maxRPM = 7500f;
-    public float rpmSmoothness = 4f;
+    public float speed; // Shows the live speed of the car
 
     private float inputVertical;
     private float inputHorizontal;
     private bool isBraking;
-
-    public float mobileControls;
-    public float mobileControls2;
-
-    private float currentThrottle;
-    private float currentSteer;
+    public float mobileControls, mobileControls2;
 
     private Rigidbody rb;
-    private bool isStarting;
 
     void Start()
     {
@@ -67,47 +43,37 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        inputVertical = Input.GetAxis("Vertical");
-        inputHorizontal = Input.GetAxis("Horizontal");
+        // Get input from player
+        inputVertical = Input.GetAxis("Vertical");     // Forward and backward
+        inputHorizontal = Input.GetAxis("Horizontal"); // Left and right
+        isBraking = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.F);       // Braking
 
-        isBraking = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.F);
-
+        // Update visual wheel positions
         UpdateWheelPositions();
 
+        // Update live speed
         UpdateSpeed();
-
-        HandleEngineInput();
-
-        UpdateFakeRPM();
     }
 
     void FixedUpdate()
     {
-        ApplyDownforce();
-
+        // Apply movement and steering
         Drive();
-
         Steer();
-
         Brake();
-
-        ApplyTractionControl();
     }
 
     public void Drive()
     {
-        if (!engineOn) return;
+        // Use mobileControls if it's non-zero; otherwise, fall back to inputVertical
+        float effectiveInput = mobileControls != 0 ? mobileControls : inputVertical;
+        float motorTorque = effectiveInput * acceleration;
 
-        float targetInput = mobileControls != 0 ? mobileControls : inputVertical;
-
-        currentThrottle = Mathf.Lerp(currentThrottle, targetInput, throttleSmoothness * Time.fixedDeltaTime);
-
-        float motorTorque = currentThrottle * acceleration;
-
+        // Apply motor torque to rear wheels
         rearLeftWheel.motorTorque = motorTorque;
-
         rearRightWheel.motorTorque = motorTorque;
 
+        // Limit speed
         if (rb.linearVelocity.magnitude > maxSpeed)
         {
             rearLeftWheel.motorTorque = 0;
@@ -117,14 +83,10 @@ public class CarController : MonoBehaviour
 
     private void Steer()
     {
-        float targetSteer = inputHorizontal + mobileControls2;
-
-        currentSteer = Mathf.Lerp(currentSteer, targetSteer, steeringSmoothness * Time.fixedDeltaTime);
-
-        float steer = currentSteer * steeringAngle;
+        // Apply steering to front wheels
+        float steer = (inputHorizontal+mobileControls2) * steeringAngle;
 
         frontLeftWheel.steerAngle = steer;
-
         frontRightWheel.steerAngle = steer;
     }
 
@@ -132,10 +94,12 @@ public class CarController : MonoBehaviour
     {
         if (isBraking)
         {
+            // Apply brake torque to all wheels
             ApplyBrakes();
         }
         else
         {
+            // Reset brake torque when not braking
             frontLeftWheel.brakeTorque = 0;
             frontRightWheel.brakeTorque = 0;
             rearLeftWheel.brakeTorque = 0;
@@ -145,24 +109,11 @@ public class CarController : MonoBehaviour
 
     public void ApplyBrakes()
     {
+        // Apply brake torque to all wheels when braking
         frontLeftWheel.brakeTorque = brakeForce;
         frontRightWheel.brakeTorque = brakeForce;
         rearLeftWheel.brakeTorque = brakeForce;
         rearRightWheel.brakeTorque = brakeForce;
-    }
-
-    private void ApplyTractionControl()
-    {
-        Vector3 localVelocity = transform.InverseTransformDirection(rb.linearVelocity);
-
-        localVelocity.x *= tractionControl;
-
-        rb.linearVelocity = transform.TransformDirection(localVelocity);
-    }
-
-    private void ApplyDownforce()
-    {
-        rb.AddForce(-transform.up * downforce * rb.linearVelocity.magnitude);
     }
 
     private void UpdateWheelPositions()
@@ -178,91 +129,43 @@ public class CarController : MonoBehaviour
         Vector3 pos;
         Quaternion rot;
 
+        // Get the position and rotation from the collider
         collider.GetWorldPose(out pos, out rot);
 
+        // If the wheel should be flipped, rotate it 180 degrees around the Y-axis
         if (shouldFlip)
         {
-            rot *= Quaternion.Euler(0, 180, 0);
+            rot *= Quaternion.Euler(0, 180, 0); // Flip the wheel by 180 degrees on the Y-axis
         }
 
+        // Apply to the wheel transform
         wheelTransform.position = pos;
-
         wheelTransform.rotation = rot;
     }
 
     private void UpdateSpeed()
     {
-        speed = rb.linearVelocity.magnitude * 3.6f;
+        // Calculate the live speed of the car in kilometers per hour (kph)
+        speed = rb.linearVelocity.magnitude * 3.6f; // Magnitude of velocity vector in kph
 
+        // Lerp the speed to 0 if it's very low and the player is not accelerating or reversing
         if (Mathf.Abs(inputVertical) < 0.01f && speed < 10f)
         {
+            // Gradually reduce the velocity using Lerp
             Vector3 currentVelocity = rb.linearVelocity;
-
-            rb.linearVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, Time.deltaTime * 2f);
-        }
-    }
-
-    private void UpdateFakeRPM()
-    {
-        float targetRPM = Mathf.Lerp(minRPM, maxRPM, Mathf.Abs(currentThrottle) + rb.linearVelocity.magnitude / maxSpeed);
-
-        engineRPM = Mathf.Lerp(engineRPM, targetRPM, rpmSmoothness * Time.deltaTime);
-    }
-
-    private void HandleEngineInput()
-    {
-        if (Input.GetKeyDown(engineKey) && !isStarting)
-        {
-            if (engineOn)
-            {
-                TurnOffEngine();
-            }
-            else
-            {
-                StartCoroutine(StartEngine());
-            }
-        }
-    }
-
-    private IEnumerator StartEngine()
-    {
-        isStarting = true;
-
-        yield return new WaitForSeconds(engineStartDelay);
-
-        engineOn = true;
-
-        isStarting = false;
-    }
-
-    private void TurnOffEngine()
-    {
-        engineOn = false;
-
-        currentThrottle = 0f;
-    }
-
-    public void ToggleEngine()
-    {
-        if (isStarting) return;
-
-        if (engineOn)
-        {
-            TurnOffEngine();
-        }
-        else
-        {
-            StartCoroutine(StartEngine());
+            rb.linearVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, Time.deltaTime * 2f); // Adjust the "2f" to control the deceleration speed
         }
     }
 
     public void MobileControls(float dir)
     {
-        mobileControls = Mathf.Clamp(dir, -1f, 1f);
+        mobileControls = dir;
     }
 
+    // Public function to steer left
     public void Steer(float dir)
     {
-        mobileControls2 = Mathf.Clamp(dir, -1f, 1f);
+        mobileControls2 = dir;
     }
+      
 }

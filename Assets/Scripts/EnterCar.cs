@@ -22,8 +22,9 @@ public class EnterCar : MonoBehaviour
 
     private void Awake()
     {
+        // Get references to required components
         playerAnimator = GetComponent<Animator>();
-        playerMovementScript = GetComponent<MonoBehaviour>(); 
+        playerMovementScript = GetComponent<MonoBehaviour>(); // Replace with the specific type if needed
         characterController = GetComponent<CharacterController>();
         playerShooting = GetComponent<PlayerShooting>();
     }
