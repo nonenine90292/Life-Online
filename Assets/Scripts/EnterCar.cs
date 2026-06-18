@@ -13,18 +13,16 @@ public class EnterCar : MonoBehaviour
     private CharacterController characterController; // CharacterController component on the player
     private PlayerShooting playerShooting;
 
-    private Transform drivingPos,enterPosition, enterPositionNPC; // Driving position for later movement
+    private Transform drivingPos, enterPosition, enterPositionNPC; // Driving positions
     public GameObject nearestCar, cam, gun;
     GameObject ped;
     public GameObject OnfootControls, driveControls;
     public CarController currentcar;
 
-
     private void Awake()
     {
-        // Get references to required components
         playerAnimator = GetComponent<Animator>();
-        playerMovementScript = GetComponent<MonoBehaviour>(); // Replace with the specific type if needed
+        playerMovementScript = GetComponent<MonoBehaviour>(); 
         characterController = GetComponent<CharacterController>();
         playerShooting = GetComponent<PlayerShooting>();
     }
@@ -35,7 +33,9 @@ public class EnterCar : MonoBehaviour
         {
             CheckCar();
         }
-        if (driving)
+        
+        // Mientras maneja, fijar posición sin excepción
+        if (driving && drivingPos != null)
         {
             transform.position = drivingPos.position;
             transform.rotation = drivingPos.rotation;
@@ -45,7 +45,6 @@ public class EnterCar : MonoBehaviour
 
     void TryEnterNearestCar()
     {
-        // Find all cars in range
         GameObject[] cars = GameObject.FindGameObjectsWithTag(carTag);
         nearestCar = null;
         float shortestDistance = detectionRange;
@@ -72,15 +71,20 @@ public class EnterCar : MonoBehaviour
 
     void CarCamera()
     {
-        cam.GetComponent<CameraScript>().enabled = false;
-        cam.GetComponent<CarCameraController>().enabled = true;
-        cam.GetComponent<CarCameraController>().SetCar(nearestCar);
+        if (cam == null || nearestCar == null) return;
+        if (cam.GetComponent<CameraScript>() != null) cam.GetComponent<CameraScript>().enabled = false;
+        if (cam.GetComponent<CarCameraController>() != null)
+        {
+            cam.GetComponent<CarCameraController>().enabled = true;
+            cam.GetComponent<CarCameraController>().SetCar(nearestCar);
+        }
     }
 
     void PlayerCamera()
     {
-        cam.GetComponent<CameraScript>().enabled = true;
-        cam.GetComponent<CarCameraController>().enabled = false;
+        if (cam == null) return;
+        if (cam.GetComponent<CameraScript>() != null) cam.GetComponent<CameraScript>().enabled = true;
+        if (cam.GetComponent<CarCameraController>() != null) cam.GetComponent<CarCameraController>().enabled = false;
     }
 
     void GetInsideCar(GameObject car)
@@ -94,57 +98,64 @@ public class EnterCar : MonoBehaviour
 
         if (enterPosition == null || drivingPos == null)
         {
-            Debug.LogWarning("EnterPosition or DrivingPosition transform not found on the car!");
+            Debug.LogWarning("EnterPosition or DrivingPosition missing!");
+            opening = false;
             return;
         }
 
-        // Move the player to the enter position
+        // Posicionar jugador en la puerta
         transform.position = enterPosition.position;
         transform.rotation = enterPosition.rotation;
 
-        // Disable movement and character controller
-        if (characterController != null)
-        {
-            characterController.enabled = false;
-        }
-        if (playerMovementScript != null)
-        {
-            playerMovementScript.enabled = false;
-        }
-        playerShooting.enabled = false;
+        // Desactivar físicas y control a pie para que no interfieran con la animación
+        if (characterController != null) characterController.enabled = false;
+        if (playerMovementScript != null) playerMovementScript.enabled = false;
+        if (playerShooting != null) playerShooting.enabled = false;
+
         CarAI carai = nearestCar.GetComponent<CarAI>();
-        ped = carai.driver;
-        carai.enabled = false;
-        StartCoroutine(ThrowOutPed());
+        if (carai != null)
+        {
+            ped = carai.driver;
+            carai.enabled = false;
+            if (ped != null) StartCoroutine(ThrowOutPed());
+        }
+
         nearestCar.GetComponent<Rigidbody>().isKinematic = true;
-        gun.SetActive(false);
+        if (gun != null) gun.SetActive(false);
 
-        // Play the enter car animation
-        playerAnimator.SetBool("driving", true);
-        car.transform.Find("door").GetComponent<Animation>().Play();
+        // --- LÓGICA DE ANIMACIÓN SEGURA ---
+        // Forzamos directamente al Animator a reproducir el estado "Entering Car" desde el inicio.
+        // Esto rompe cualquier bucle causado por malas configuraciones de flechas de transición.
+        playerAnimator.Play("Entering Car", 0, 0f);
+        
+        // Ponemos driving en false al iniciar para que sepa que APENAS está entrando
+        playerAnimator.SetBool("driving", false);
 
-        // Set insideCar state and start monitoring animation
+        Transform door = car.transform.Find("door");
+        if (door != null && door.GetComponent<Animation>() != null)
+        {
+            door.GetComponent<Animation>().Play();
+        }
+
         insideCar = true;
         StartCoroutine(WaitForDrivingAnimationToStart());
-
-        Debug.Log("Player started entering the car!");
     }
 
     IEnumerator WaitForDrivingAnimationToStart()
     {
-        yield return new WaitForSeconds(3.15f); // Wait for the "enter_car" animation to finish
+        // Espera exacta a que termine de reproducirse la animación de subir (3.15 segundos)
+        yield return new WaitForSeconds(3.15f); 
 
-        // Once "enter_car" animation finishes, move the player to the driving position
         MoveToDrivingPosition();
 
-        // Enable car controls and trigger the "driving" animation
-        currentcar=nearestCar.GetComponent<CarController>();
-        currentcar.enabled = true;
+        currentcar = nearestCar.GetComponent<CarController>();
+        if (currentcar != null) currentcar.enabled = true;
+        
         nearestCar.GetComponent<Rigidbody>().isKinematic = false;
-        playerAnimator.SetBool("driving", true);  // Trigger the "driving" animation
+        
+        // Pasado el tiempo, cambiamos a true. Esto activará la transición hacia la animación de manejo fija.
+        playerAnimator.SetBool("driving", true);  
         opening = false;
-
-        Debug.Log("Player has finished entering the car and is now driving.");
     }
 
     void MoveToDrivingPosition()
@@ -154,158 +165,139 @@ public class EnterCar : MonoBehaviour
             transform.position = drivingPos.position;
             transform.rotation = drivingPos.rotation;
             driving = true;
-            Debug.Log("Player moved to driving position!");
-        }
-        else
-        {
-            Debug.LogWarning("Driving position is not assigned!");
         }
     }
 
     void ExitCar()
     {
-        
-        if (opening) return; // Prevent the player from exiting while the process is ongoing
-
+        if (opening) return; 
         opening = true;
 
-        // Optional: Allow exit even if the car is moving, or modify speed check as needed
         if (nearestCar.GetComponent<Rigidbody>().linearVelocity.magnitude < 2f)
         {
             OnfootControls.SetActive(true);
             driveControls.SetActive(false);
             nearestCar.GetComponent<Rigidbody>().isKinematic = true;
             PlayerCamera();
-            nearestCar.GetComponent<CarController>().enabled = false;
+            
+            CarController carCtrl = nearestCar.GetComponent<CarController>();
+            if (carCtrl != null) carCtrl.enabled = false;
+            
             driving = false;
+            
+            // Enviamos la orden de salir
             playerAnimator.SetBool("driving", false);
-            nearestCar.transform.Find("door").GetComponent<Animation>().Play();
+            playerAnimator.Play("Exiting Car", 0, 0f);
 
-            Transform exitPosition = nearestCar.transform.Find("ExitPosition");
-            if (exitPosition == null)
+            Transform door = nearestCar.transform.Find("door");
+            if (door != null && door.GetComponent<Animation>() != null)
             {
-                Debug.LogWarning("Exit position is null! Cannot exit car.");
-                opening = false; // Reset opening flag if exit fails
-                return;
+                door.GetComponent<Animation>().Play();
             }
 
-            transform.position = exitPosition.position;
-            transform.rotation = exitPosition.rotation;
+            Transform exitPosition = nearestCar.transform.Find("ExitPosition");
+            if (exitPosition != null)
+            {
+                transform.position = exitPosition.position;
+                transform.rotation = exitPosition.rotation;
+            }
 
-            StartCoroutine(MoveOutside());  // Proceed with the exit animation
+            StartCoroutine(MoveOutside());  
         }
         else
         {
-            Debug.Log("Car is moving too fast to exit!");
-            opening = false; // Reset opening flag even if exit isn't allowed due to speed
+            opening = false; 
         }
     }
 
     IEnumerator MoveOutside()
     {
-        // Wait for the exit animation to play (ensure the correct state is checked here)
-        while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Move"))  // Change "Move" to your actual exit animation name if needed
-        {
-            yield return null; // Wait for the next frame
-        }
+        yield return new WaitForSeconds(2.5f); // Tiempo de espera para bajarse del coche
 
-        // Move to the out position
         Transform outPosition = nearestCar.transform.Find("OutPosition");
         if (outPosition != null)
         {
             transform.position = outPosition.position;
             transform.rotation = outPosition.rotation;
         }
-        else
-        {
-            Debug.LogWarning("Out position is null! Cannot move outside.");
-        }
 
-        // Final cleanup after exiting
         opening = false;
-        playerMovementScript.enabled = true;
-        playerShooting.enabled = true;
-        characterController.enabled = true;
-        gun.SetActive(true);
-
-        Debug.Log("Player has exited the car.");
+        if (playerMovementScript != null) playerMovementScript.enabled = true;
+        if (playerShooting != null) playerShooting.enabled = true;
+        if (characterController != null) characterController.enabled = true;
+        if (gun != null) gun.SetActive(true);
     }
 
     IEnumerator ThrowOutPed()
     {
+        if (ped == null) yield break;
+        
         enterPositionNPC = nearestCar.transform.Find("EnterPositionNPC");
-        ped.transform.position = enterPositionNPC.position;
-        ped.transform.rotation = enterPositionNPC.rotation;
-        ped.transform.Find("Body").gameObject.GetComponent<Animator>().SetBool("driving", false);
+        if (enterPositionNPC != null)
+        {
+            ped.transform.position = enterPositionNPC.position;
+            ped.transform.rotation = enterPositionNPC.rotation;
+        }
+        
+        Transform pedBody = ped.transform.Find("Body");
+        if (pedBody != null && pedBody.GetComponent<Animator>() != null)
+        {
+            pedBody.GetComponent<Animator>().SetBool("driving", false);
+        }
+
         Collider[] childColliders = ped.GetComponentsInChildren<Collider>();
         foreach (Collider collider in childColliders)
         {
-            collider.enabled = true; // Enable each collider
-        }
-        //ped.GetComponent<Rigidbody>().isKinematic = false;
-        Animator pedAnimator = ped.transform.Find("Body").gameObject.GetComponent<Animator>();
-
-        // Wait until the blend tree named "Walking" starts
-        while (!pedAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walking"))
-        {
-            yield return null; // Wait for the next frame
+            collider.enabled = true; 
         }
 
-        ped.transform.position = new Vector3(
-            ped.transform.position.x, 
-            ped.transform.position.y+1f, 
-            ped.transform.position.z
-        );
+        // CORRECCIÓN NAVMESH REPETITIVO: Desactivamos el agente antes de moverlo de coordenadas
+        UnityEngine.AI.NavMeshAgent pedAgent = ped.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (pedAgent != null) pedAgent.enabled = false;
+
+        yield return new WaitForSeconds(0.2f);
         
-        ped.GetComponent<Pedestrians>().enabled = true;
-        ped.GetComponent<Collider>().enabled = true;
-        yield return new WaitForSeconds(0.1f);
-        StartCoroutine(ped.GetComponent<Pedestrians>().BoostSpeed());
+        if (ped != null)
+        {
+            ped.transform.position = new Vector3(
+                ped.transform.position.x, 
+                ped.transform.position.y + 0.1f, 
+                ped.transform.position.z
+            );
+            
+            // Forzamos la actualización de posición en el NavMesh de Unity
+            if (pedAgent != null)
+            {
+                pedAgent.Warp(ped.transform.position);
+                pedAgent.enabled = true;
+            }
+
+            Pedestrians pedScript = ped.GetComponent<Pedestrians>();
+            if (pedScript != null)
+            {
+                pedScript.enabled = true;
+                ped.GetComponent<Collider>().enabled = true;
+                StartCoroutine(pedScript.BoostSpeed());
+            }
+        }
     }
 
     public void CheckCar()
     {
         if (!opening)
         {
-            if (!driving)
-            {
-                TryEnterNearestCar();
-                
-            }
-            else
-            {
-                ExitCar();
-                
-            }
+            if (!driving) TryEnterNearestCar();
+            else ExitCar();
         }
     }
 
-    public void AccelerateCar()
-    {
-        currentcar.MobileControls(1.5f);
-    }
-    public void ReverseCar()
-    {
-        currentcar.MobileControls(-1.5f);
-    }
-    public void Brake()
-    {
-        currentcar.ApplyBrakes();
-    }
-    public void IdleCar()
-    {
-        currentcar.MobileControls(0);
-    }
-    public void SteerLeft()
-    {
-        currentcar.Steer(-1f);
-    }
-    public void SteerRight()
-    {
-        currentcar.Steer(1f);
-    }
-    public void ResetSteer()
-    {
-        currentcar.Steer(0f);
-    }
+    public void MobileControls(float direction) { if (currentcar != null && currentcar.enabled) currentcar.MobileControls(direction); }
+    public void AccelerateCar() => MobileControls(1.5f);
+    public void ReverseCar() => MobileControls(-1.5f);
+    public void IdleCar() => MobileControls(0f);
+    public void Brake() { if (currentcar != null && currentcar.enabled) currentcar.ApplyBrakes(); }
+    public void Steer(float value) { if (currentcar != null && currentcar.enabled) currentcar.Steer(value); }
+    public void SteerLeft() => Steer(-1f);
+    public void SteerRight() => Steer(1f);
+    public void ResetSteer() => Steer(0f);
 }

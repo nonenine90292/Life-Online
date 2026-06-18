@@ -33875,7 +33875,7 @@ PrefabInstance:
     - target: {fileID: 7639745398817445857, guid: 88db7a2f7e5894341a2d7c3a45083a4f, type: 3}
       propertyPath: gun
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1440975674}
     - target: {fileID: 7639745398817445857, guid: 88db7a2f7e5894341a2d7c3a45083a4f, type: 3}
       propertyPath: driveControls
       value: 
