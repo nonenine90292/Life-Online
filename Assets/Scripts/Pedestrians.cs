@@ -35,16 +35,14 @@ public class Pedestrians : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        if (agent != null)
-        {
-            agent.enabled = true;
-            defaultSpeed = agent.speed;
-        }
-
+        // 1. Asignar capa inicial de forma segura
         SetLayerRecursively(gameObject, "npc");
+        
+        GetComponent<NavMeshAgent>().enabled = true;
+        agent = GetComponent<NavMeshAgent>();
+        defaultSpeed = agent.speed;
 
-        // Find all objects with the "waypoint" tag and add them to the waypoints array
+        // 2. Buscar waypoints por Tag
         GameObject[] waypointObjects = GameObject.FindGameObjectsWithTag("waypoint");
         waypoints = new Transform[waypointObjects.Length];
 
@@ -53,64 +51,66 @@ public class Pedestrians : MonoBehaviour
             waypoints[i] = waypointObjects[i].transform;
         }
 
-        player = FindFirstObjectByType<PlayerMovement>();
+        // 3. Buscar al jugador usando el método moderno de Unity 6
+        player = FindAnyObjectByType<PlayerMovement>();
+        
         rb = GetComponent<Rigidbody>();
         carHit = GetComponent<Collider>();
 
-        // Solo iniciamos el movimiento si hay waypoints válidos
+        // Solo iniciar movimiento si hay waypoints válidos en la escena
         if (waypoints.Length > 0)
         {
             StartCoroutine(RandomMovement());
         }
         else
         {
-            Debug.LogWarning($"El NPC {gameObject.name} no encontró waypoints con el tag 'waypoint'!");
+            Debug.LogWarning($"[Pedestrians] ¡Cuidado! No se encontraron GameObjects con el Tag 'waypoint' en la escena para {gameObject.name}.");
         }
     }
 
     void Update()
     {
-        if (dead) return; // Si está muerto, no ejecutes nada en Update
+        if (dead) return;
 
-        // SEGURIDAD: Validar que el agente esté activo y en el NavMesh antes de pedir velocidad
-        if (agent != null && agent.enabled && agent.isOnNavMesh)
+        if (animator != null && agent != null)
         {
+            // Use agent's speed to set the blend tree animation
             animator.SetFloat("speed", agent.velocity.magnitude);
         }
-        else
-        {
-            animator.SetFloat("speed", 0f);
-        }
 
-        if (player != null && player.enabled)
+        // SOLUCIÓN CRÍTICA: En vez de apagar el colisionador, lo volvemos Trigger. 
+        // Así el Raycast de las balas SÍ impactará al NPC, pero el jugador no se trabará físicamente al caminar.
+        if (player != null && carHit != null)
         {
-            carHit.enabled = false;
-        }
-        else
-        {
-            carHit.enabled = true;
-        }
-
-        // SEGURIDAD: Solo chequear áreas si el agente está listo y sobre el NavMesh
-        if (agent != null && agent.enabled && agent.isOnNavMesh)
-        {
-            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+            if (player.enabled)
             {
-                int roadArea = NavMesh.GetAreaFromName("Road");
-                int walkableArea = NavMesh.GetAreaFromName("Walkable");
+                carHit.enabled = true;      // Mantenlo encendido para las balas
+                carHit.isTrigger = true;    // Conviértelo en fantasma/atravesable para el cuerpo del Player
+            }
+            else
+            {
+                carHit.enabled = true;
+                carHit.isTrigger = false;   // Sólido de nuevo para que los carros lo puedan atropellar
+            }
+        }
 
-                if (hit.mask == (1 << roadArea))
-                {
-                    Debug.Log("NPC is on the road, redirecting to walkable area.");
-                    MoveToNearestWalkableArea(walkableArea);
-                }
+        // Check if the NPC is on the "Road" area
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
+        {
+            int roadArea = NavMesh.GetAreaFromName("Road");
+            int walkableArea = NavMesh.GetAreaFromName("Walkable");
+
+            if (hit.mask == (1 << roadArea))
+            {
+                Debug.Log("NPC is on the road, redirecting to walkable area.");
+                MoveToNearestWalkableArea(walkableArea);
             }
         }
     }
 
     void MoveToNearestWalkableArea(int walkableArea)
     {
-        if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
+        if (agent == null || !agent.enabled) return;
 
         // Find the nearest point on the "Walkable" NavMesh
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit walkableHit, 10.0f, 1 << walkableArea))
@@ -126,24 +126,22 @@ public class Pedestrians : MonoBehaviour
 
     IEnumerator RandomMovement()
     {
-        // Esperar un frame al inicio para asegurar que el NPC se asentó en el mapa
-        yield return null;
-
         while (!dead)
         {
-            // SEGURIDAD ANTES DE OPERAR EL AGENTE (Evita errores de NavMesh)
-            if (agent != null && agent.enabled && agent.isOnNavMesh && waypoints.Length > 0)
+            if (waypoints == null || waypoints.Length == 0) yield return new WaitForSeconds(1f);
+
+            Transform targetWaypoint = waypoints[Random.Range(0, waypoints.Length)];
+            
+            if (targetWaypoint != null && agent != null && agent.enabled)
             {
-                Transform targetWaypoint = waypoints[Random.Range(0, waypoints.Length)];
                 agent.SetDestination(targetWaypoint.position);
 
-                // Ciclo de espera mientras camina, agregando la verificación de isOnNavMesh
-                while (!dead && agent.enabled && agent.isOnNavMesh && (agent.remainingDistance > agent.stoppingDistance || agent.pathPending))
+                while (!dead && agent.enabled && (agent.remainingDistance > agent.stoppingDistance || agent.pathPending))
                 {
                     yield return null; // Wait until the next frame
                 }
 
-                if (agent.enabled && agent.isOnNavMesh && !agent.pathPending && agent.velocity.sqrMagnitude < 0.1f)
+                if (agent.enabled && !agent.pathPending && agent.velocity.sqrMagnitude < 0.1f)
                 {
                     Debug.Log($"Reached destination: {targetWaypoint.name}");
                 }
@@ -157,82 +155,78 @@ public class Pedestrians : MonoBehaviour
     {
         if (dead) return;
 
-        Debug.Log("Bullet hit detected. Boosting speed!");
+        Debug.Log($"¡Daño recibido! Balazo de: {damage} HP.");
         StopCoroutine("BoostSpeed");
         StartCoroutine(BoostSpeed());
+        
         health -= damage;
 
         if (health <= 0)
         {
-            Die();
+            Debug.Log("Health is 0, falling like a ragdoll.");
+            Die(); // Llamamos al nuevo método unificado de muerte
         }
     }
 
-    private void Die()
+    // Nuevo método público para forzar la muerte sin importar fallos
+    public void Die()
     {
-        Debug.Log("Health is 0, falling like a ragdoll.");
+        if (dead) return;
         dead = true;
-        StopAllCoroutines(); // Frena movimiento y boost de velocidad al seco
+        
+        StopAllCoroutines();
         TriggerRagdoll();
     }
 
     public IEnumerator BoostSpeed()
     {
-        if (agent == null || !agent.enabled) yield break;
-
         idleDuration = 0f;
-        agent.speed = boostedSpeed;
+        if (agent != null && agent.enabled) agent.speed = boostedSpeed;
 
         yield return new WaitForSeconds(boostedDuration);
 
-        if (agent != null && agent.enabled)
-        {
-            agent.speed = defaultSpeed;
-        }
+        if (agent != null && agent.enabled) agent.speed = defaultSpeed;
         idleDuration = 3f;
     }
 
     private void TriggerRagdoll()
     {
+        // Cambiar a la capa dead de forma segura
         SetLayerRecursively(gameObject, "dead");
 
         Collider mainCollider = GetComponent<Collider>();
         if (mainCollider != null)
-            mainCollider.enabled = false;
+        {
+            mainCollider.enabled = true; // Mantener activo en muerte si es necesario
+            mainCollider.isTrigger = false;
+        }
 
-        if (rb != null)
-            rb.isKinematic = false;
+        if (rb != null) rb.isKinematic = false;
 
-        animator.enabled = false;
-        
-        if (agent != null)
-            agent.enabled = false; // Apagamos el agente para que no tire más errores tras morir
+        if (animator != null) animator.enabled = false;
+        if (agent != null) agent.enabled = false;
 
         if (ragdoll != null)
         {
             foreach (Rigidbody rg in ragdoll.GetComponentsInChildren<Rigidbody>())
             {
-                rg.isKinematic = false;
+                if (rg != null) rg.isKinematic = false;
             }
         }
     }
 
-    private void SetLayerRecursively(GameObject obj, string layer)
+    private void SetLayerRecursively(GameObject obj, string layerName)
     {
-        int layerIndex = LayerMask.NameToLayer(layer);
-        
-        // SEGURIDAD: Si la capa no existe en Unity, no la asigna y evita el error [0...31]
-        if (layerIndex != -1)
+        int layerId = LayerMask.NameToLayer(layerName);
+        if (layerId == -1) return;
+
+        obj.layer = layerId;
+        foreach (Transform child in obj.transform)
         {
-            obj.layer = layerIndex;
-            foreach (Transform child in obj.transform)
+            if (child != null)
             {
-                SetLayerRecursively(child.gameObject, layer);
+                SetLayerRecursively(child.gameObject, layerName);
             }
-        }
-        else
-        {
-            Debug.LogWarning($"La capa '{layer}' no existe en la configuración de Unity. ¡Créala en Edit > Project Settings > Tags and Layers!");
         }
     }
 
@@ -240,6 +234,7 @@ public class Pedestrians : MonoBehaviour
     {
         if (dead) return;
 
+        // Comportamiento de atropello (Soporta colisión física o Trigger)
         if (collision.gameObject.CompareTag("Car"))
         {
             Rigidbody carRb = collision.gameObject.GetComponent<Rigidbody>();
@@ -251,12 +246,13 @@ public class Pedestrians : MonoBehaviour
                     GameObject blood = Instantiate(bloodSplash, transform.position, transform.rotation);
                     Destroy(blood, 0.5f);
                 }
+                
+                health = 0;
                 Die();
             }
         }
     }
 
-    // Detect shooting sound
     public void OnHeardShooting(Vector3 soundOrigin)
     {
         if (dead) return;

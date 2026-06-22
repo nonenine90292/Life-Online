@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     public Transform cameraTransform;
-    public Transform upperBodyBone;
 
     private CharacterController controller;
     private Animator animator;
@@ -41,11 +40,6 @@ public class PlayerMovement : MonoBehaviour
         HandleAnimations();
         HandleMovementInput();
         UpdateAimLayer();
-    }
-
-    void LateUpdate()
-    {
-        HandleUpperBodyAim();
     }
 
     void HandleMovement()
@@ -90,18 +84,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAiming)
         {
+            // Forzamos al cuerpo a mirar estrictamente hacia el frente horizontal de la cámara
             Vector3 lookDirection = cameraTransform.forward;
-
             lookDirection.y = 0f;
 
             if (lookDirection != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-
+                
+                // Rotación un poco más rápida al apuntar para mejor respuesta táctil
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
-                    rotationSpeed * Time.deltaTime
+                    rotationSpeed * 1.5f * Time.deltaTime
                 );
             }
         }
@@ -167,32 +162,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsAiming", isAiming);
     }
 
-    void HandleUpperBodyAim()
-    {
-        if (!isAiming)
-            return;
-
-        if (upperBodyBone == null)
-            return;
-
-        float pitch = cameraTransform.eulerAngles.x;
-
-        if (pitch > 180f)
-            pitch -= 360f;
-
-        Quaternion targetRotation = Quaternion.Euler(
-            pitch,
-            0f,
-            0f
-        );
-
-        upperBodyBone.localRotation = Quaternion.Lerp(
-            upperBodyBone.localRotation,
-            targetRotation,
-            Time.deltaTime * 10f
-        );
-    }
-
     void UpdateAimLayer()
     {
         if (animator == null)
@@ -204,7 +173,6 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         float targetWeight = isAiming ? 1f : 0f;
-
         float currentWeight = animator.GetLayerWeight(layerIndex);
 
         animator.SetLayerWeight(
